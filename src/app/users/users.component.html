@@ -1,0 +1,180 @@
+<br>
+<br>
+<br>
+<div>
+  <h1>Users Table</h1>
+  <div class="example-container">
+    <mat-table #userstable class="pointer" [dataSource]="cro.usersTableDataSource">
+
+      <ng-container matColumnDef="users_id">
+        <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.users_id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="last_name">
+        <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.last_name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="first_name">
+        <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.first_name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.email}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef> Created</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.created | date:'yyyy-MM-dd HH:mm'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalDistance">
+        <mat-header-cell *matHeaderCellDef> Total KM</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.totalDistance | number:'1.1-3'}}</mat-cell>
+      </ng-container>
+      totalDistance
+
+      <mat-header-row *matHeaderRowDef="cro.usersTableDisplayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: cro.usersTableDisplayedColumns;"
+               (click)="cro.loadTripTable(row)"></mat-row>
+    </mat-table>
+
+    <mat-paginator *ngIf="cro.showUsersPaginator" #cro.userspaginator
+                   [length]=cro.usersLength
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   (page)="cro.paginatorUsersEvent = $event; cro.onPaginateUsersChange($event)">
+    </mat-paginator>
+  </div>
+
+
+  <p [ngStyle]="{'text-background': 'transparent'}">&nbsp;</p>
+  <div class="container"
+       fxLayout
+       fxLayout.xs="column"
+       fxLayoutAlign="center"
+       fxLayoutGap="10px"
+       fxLayoutGap.xs="0">
+    <div class="item item-4" fxFlex fxFlexOffset="50px" fxFlexOffset.xs="0" *ngIf="cro.showTripsTable">
+      <h1>Trip Table Corolated To {{cro.currentUserFirstNameAndLastName}}</h1>
+      <div>
+        <div class="example-container">
+          <mat-table #tripstable class="pointer" [dataSource]="cro.tripsTableDataSource">
+
+            <ng-container matColumnDef="trip_id">
+              <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+              <mat-cell *matCellDef="let trip"> {{trip.trip_id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="time_start">
+              <mat-header-cell *matHeaderCellDef>Time start</mat-header-cell>
+              <mat-cell *matCellDef="let trip"> {{trip.time_start | date:'yyyy-MM-dd HH:mm'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="time_end">
+              <mat-header-cell *matHeaderCellDef>Time end</mat-header-cell>
+              <mat-cell *matCellDef="let trip"> {{trip.time_end | date:'yyyy-MM-dd HH:mm'}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="hasEvent">
+              <mat-header-cell *matHeaderCellDef>Event</mat-header-cell>
+              <mat-cell *matCellDef="let trip">
+                <div *ngIf="trip.hasEvent"><img src="comroadsIconMedia.png"></div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="distance">
+              <mat-header-cell *matHeaderCellDef>Distance</mat-header-cell>
+              <mat-cell *matCellDef="let trip"> {{trip.distance | number:'1.1-3'}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="cro.tripsTableDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: cro.tripsTableDisplayedColumns;"
+                     (click)="cro.exploreTripData(row)"></mat-row>
+          </mat-table>
+
+          <mat-paginator *ngIf="cro.showTripsPaginator" #cro.tripspaginator
+                         [length]=cro.tripsLength
+                         [pageSize]="5"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         (page)="cro.paginatorTripsEvent = $event; cro.onPaginateTripsChange($event)">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+    <div class="item item-5" fxFlex="50%">
+      <div *ngIf="cro.showTripMaps">
+
+        <h1>Trip On Map</h1>
+        <agm-map [zoom]="cro.zoom" [latitude]="cro.latitude" [longitude]="cro.longitude" [fullscreenControl]="true">
+          <agm-marker [latitude]="cro.startingPointLatitude" [longitude]="cro.startingPointLongitude"
+                      [iconUrl]="'comroadsIconStart.png'"></agm-marker>
+          <agm-marker [latitude]="cro.endingPointLatitude" [longitude]="cro.endingPointLongitude"
+                      [iconUrl]="'comroadsIconCheckered.png'"></agm-marker>
+          <div *ngFor="let evt of cro.uploadList">
+            <agm-marker [latitude]="evt.latitude" [longitude]="evt.longitude"
+                        [iconUrl]="'comroadsIconMedia.png'"></agm-marker>
+          </div>
+          <agm-marker *ngIf="cro.pointClicked" [latitude]="cro.pointLatitude"
+                      [longitude]="cro.pointLongitude"></agm-marker>
+
+          <agm-data-layer [geoJson]="cro.GeoJsonToDraw"></agm-data-layer>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 *ngIf="cro.showTripChart">Analytic Area for trip id:{{cro.currentTripId}}</h1>
+<div style="display: block" *ngIf="cro.showTripChart">
+  <google-chart #cchart [data]="cro.lineChartAccelerationData" (chartSelect)='cro.selectPoint($event)'></google-chart>
+  <google-chart #cchart [data]="cro.lineChartSpeedData" (chartSelect)='cro.selectPoint($event)'></google-chart>
+</div>
+
+<div *ngIf="cro.uploadList.length > 0">
+  <h1>Events Table</h1>
+  <div>
+    <div class="example-container">
+      <mat-table #eventstable class="pointer" [dataSource]="cro.eventsTableDataSource">
+
+        <ng-container matColumnDef="users_id">
+          <mat-header-cell *matHeaderCellDef> User ID</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.users_id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.date | date:'yyyy-MM-dd HH:mm:ss'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="video_name">
+          <mat-header-cell *matHeaderCellDef>Video Name</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.video_name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="latitude">
+          <mat-header-cell *matHeaderCellDef>Latitude</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.latitude | number:'1.1-3'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="longitude">
+          <mat-header-cell *matHeaderCellDef>Longitude</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.longitude | number:'1.1-3'}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.location}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cloud_status">
+          <mat-header-cell *matHeaderCellDef>Cloud Status</mat-header-cell>
+          <mat-cell *matCellDef="let event"> {{event.cloud_status}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="cro.eventsTableDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: cro.eventsTableDisplayedColumns;"
+                 (click)="cro.selectAnUpload(row)"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
+
+

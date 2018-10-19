@@ -1,0 +1,56 @@
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+
+
+/*# sourceMappingURL=material.min.css.map */
+agm-map{
+  height: 400px;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.mat-table {
+  overflow: auto;
+    max-height: 500px;
+}
+.mat-row{
+  color: #000000;
+  font-size: 15px;
+  min-height : 36px;
+}
+button:disabled{
+  color:#000000;
+}
+previus{
+  display: block;
+  text-indent: -9999px;
+  width: 100px;
+  height: 82px;
+
+
+  background-size: 100px 82px;
+}
+.mat-column-select { overflow: visible; }
+
+.inlineCharts{
+ display: flex;
+  width: 100%;
+}
+google-chart{
+  width: 100% !important;
+  margin: 0 auto;
+  display: block;
+}

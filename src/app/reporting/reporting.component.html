@@ -1,0 +1,46 @@
+<br>
+<br><br><br>
+<button mat-raised-button (click)="lastWeekInCsv()">Last 7 Days in Csv</button>
+<br>
+<div layout="row" layout-align="center center">
+    <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle value="left" (click)="getDailyData()">
+        Daily
+      </mat-button-toggle>
+      <mat-button-toggle value="center" (click)="getWeeklyData()">
+        Weekly
+      </mat-button-toggle>
+      <mat-button-toggle value="right" (click)="getMonthlyData()">
+        Monthly
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <button mat-raised-button (click)="combineCharts()">Combine Data</button>
+</div>
+
+<div layout="column" layout-sm="column" flex *ngIf="showCharts">
+  <div flex="50">
+    <google-chart [ngStyle]="{'margin-left': '35px','margin-top': '10px', 'margin-right':'35px'}" #cchart [data]="tableChartData"></google-chart>
+  </div>
+
+  <div flex="50" *ngIf="notCombinedChart">
+    <google-chart #cchart [data]="barChartUploads" (chartSelect)='selectData($event)'></google-chart>
+  </div>
+  <div flex="50" *ngIf="notCombinedChart">
+    <google-chart #cchart [data]="barChartUniiqueActiveUsers" (chartSelect)='selectData($event)'></google-chart>
+  </div>
+  <div flex="50" *ngIf="notCombinedChart">
+    <google-chart #cchart [data]="barChartTrips" (chartSelect)='selectData($event)'></google-chart>
+  </div>
+
+  <div flex="50" *ngIf="notCombinedChart">
+    <google-chart #cchart [data]="barChartLoggedInUsers" (chartSelect)='selectData($event)'></google-chart>
+  </div>
+  <div flex="50" *ngIf="notCombinedChart">
+    <google-chart #cchart [data]="barChartUniqueLoggedInUsers" (chartSelect)='selectData($event)'></google-chart>
+  </div>
+  <div flex="50" *ngIf="notCombinedChart">
+    <google-chart #cchart [data]="barChartFailedLoggedIn" (chartSelect)='selectData($event)'></google-chart>
+  </div>
+
+</div>
+

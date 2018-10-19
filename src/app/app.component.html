@@ -1,0 +1,13 @@
+<mat-toolbar
+  [ngStyle]="{'background-color':'#17a4da', 'position':'fixed',  'top' : '0', 'left': '0', 'z-index': '2', 'width': '100%  !important'}">
+  <!--a routerLink="/dashboard"--><a (click)="goToDashboard()"><img src="comroadsnamelogo.png" [ngStyle]="{'background-color':'#17a4da','max-height':'55px'}"/></a>
+  <a routerLink="/reporting" [ngStyle]="{'margin-left': '10px','margin-top': '10px', 'margin-right':'35px'}"> <img src="reporting.png" [ngStyle]="{'background-color':'#17a4da','max-height':'39px'}"/></a>
+  <a routerLink="/find" [ngStyle]="{'margin-left': '10px','margin-top': '10px', 'margin-right':'35px'}"> <img src="find.png" [ngStyle]="{'background-color':'#17a4da','max-height':'39px'}"/></a>
+  <a routerLink="/simulator" [ngStyle]="{'margin-left': '10px','margin-top': '10px', 'margin-right':'35px'}"> <img src="simulator.png" [ngStyle]="{'background-color':'#17a4da','max-height':'39px'}"/></a>
+   <!--a routerLink="/users"> <img src="tripviewericon.png" [ngStyle]="{'background-color':'#17a4da','max-height':'55px'}"/></a-->
+</mat-toolbar>
+<router-outlet></router-outlet>
+<div class="buildText"> <p ><sub><i>build date: 8/5/2018</i></sub></p></div>
+
+
+

@@ -1,0 +1,12 @@
+agm-map{
+  height: 400px;
+}
+.inlineCharts{
+  display: flex;
+  width: 100%;
+}
+google-chart{
+  width: 100% !important;
+  margin: 0 auto;
+  display: block;
+}

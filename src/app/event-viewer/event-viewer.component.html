@@ -1,0 +1,44 @@
+<br>
+<br>
+<br>
+<div [ngStyle]="{'margin-right':'35px','margin-left':'20px','font-color': 'black','font-size':'150%'}"> <p ><sub><i>{{userToDisplayAsTitle}}</i></sub></p></div>
+<div [ngStyle]="{'margin-right':'35px','margin-left':'20px','font-color': 'black','font-size':'150%'}"> <p ><sub><i>{{tripToDisplayAsTitle}}</i></sub></p></div>
+<div [ngStyle]="{'margin-right':'35px','margin-left':'20px','font-color': 'black','font-size':'150%'}"> <p ><sub><i>{{eventToDisplayAsTitle}}</i></sub></p></div>
+<p [ngStyle]="{'text-background': 'transparent'}">&nbsp;</p>
+<div class="container"
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+  <div class="item item-4" fxFlex fxFlexOffset="50px" fxFlexOffset.xs="0">
+    <div>
+      <agm-map *ngIf="cro.trip" [zoom]="cro.eventGoogleBoundingBoxObject.zoom"
+               [latitude]="cro.eventGoogleBoundingBoxObject.latitude"
+               [longitude]="cro.eventGoogleBoundingBoxObject.longitude" [fullscreenControl]="true">
+        <agm-marker [latitude]="cro.EventMapLatitude" [longitude]="cro.EventMapLongitude"></agm-marker>
+        <agm-data-layer [geoJson]="cro.EventGeoJsonToDraw"></agm-data-layer>
+      </agm-map>
+      <agm-map *ngIf="!cro.trip" [zoom]="12"
+               [latitude]="cro.EventMapLatitude"
+               [longitude]="cro.EventMapLongitude" [fullscreenControl]="true">
+        <agm-marker [latitude]="cro.EventMapLatitude" [longitude]="cro.EventMapLongitude"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+  <div class="item item-5" fxFlex="50%">
+    <div>
+      <video [ngStyle]="{'max-height':'400px','margin-top': '18px'}" controls>
+        <source src={{cro.eventVideoTempUrl}} type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+
+  </div>
+</div>
+
+<br>
+<div class="inlineCharts" *ngIf="cro.trip">
+  <google-chart #cchart [data]="eventLineChartAccelerationData" (chartSelect)='selectPoint($event)'></google-chart>
+  <google-chart #cchart [data]="eventLineChartSpeedData" (chartSelect)='selectPoint($event)'></google-chart>
+</div>

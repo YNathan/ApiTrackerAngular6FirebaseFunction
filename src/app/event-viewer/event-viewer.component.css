@@ -1,0 +1,22 @@
+.inlineCharts{
+  display: flex;
+  width: 100%;
+}
+google-chart{
+  width: 100% !important;
+  margin: 0 auto;
+  display: block;
+}
+agm-map{
+  height: 400px;
+  margin-left: 16px;
+}
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+

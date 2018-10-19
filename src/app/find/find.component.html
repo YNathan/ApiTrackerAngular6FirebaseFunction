@@ -1,0 +1,66 @@
+<br>
+<br>
+<br><br>
+<div class="example-form">
+  <b [ngStyle]="{'font':'Times New Roman','color':'rgb(23, 164, 218)','font-size':'42px'}">User:&nbsp;&nbsp;</b>
+  <mat-form-field class="trip_id_size">
+    <input matInput placeholder="user id" [(ngModel)]="cmrSearch.searchReq.user.user_id" type="number"
+           (keydown)="keyDownFunction($event)">
+  </mat-form-field>
+  Or
+  <mat-form-field class="email_size">
+    <input matInput placeholder="Email" [(ngModel)]="cmrSearch.searchReq.user.userMail" (keydown)="keyDownFunction($event)">
+  </mat-form-field>
+  <br/>
+  <b [ngStyle]="{'font':'Times New Roman','color':'rgb(23, 164, 218)','font-size':'42px'}">Trip:&nbsp;&nbsp;&nbsp;</b>
+  <mat-form-field class="trip_id_size">
+    <input matInput placeholder="trip id" [(ngModel)]="cmrSearch.searchReq.trip.tripId" type="number" (keydown)="keyDownFunction($event)">
+  </mat-form-field>
+  Or From
+  <mat-form-field>
+    <input matInput [matDatepicker]="tripFromPicker" [(ngModel)]="cmrSearch.searchReq.trip.tripFromPicker"
+           placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="tripFromPicker"></mat-datepicker-toggle>
+    <mat-datepicker #tripFromPicker></mat-datepicker>
+  </mat-form-field>
+  To
+  <mat-form-field>
+    <input matInput [matDatepicker]="tripToPicker" [(ngModel)]="cmrSearch.searchReq.trip.tripToPicker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="tripToPicker"></mat-datepicker-toggle>
+    <mat-datepicker #tripToPicker></mat-datepicker>
+  </mat-form-field>
+  <br/>
+
+  <b [ngStyle]="{'font':'Times New Roman','color':'rgb(23, 164, 218)','font-size':'42px'}">Event:</b>
+  <mat-form-field class="trip_id_size">
+    <input matInput placeholder="Event id" value="eventId" [(ngModel)]="cmrSearch.searchReq.event.eventId" type="number" (keydown)="keyDownFunction($event)">
+  </mat-form-field>
+  Or From
+  <mat-form-field>
+    <input matInput [matDatepicker]="eventFromPicker" [(ngModel)]="cmrSearch.searchReq.event.eventFromPicker"
+           placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="eventFromPicker"></mat-datepicker-toggle>
+    <mat-datepicker #eventFromPicker></mat-datepicker>
+  </mat-form-field>
+  To
+  <mat-form-field>
+    <input matInput [matDatepicker]="eventToPicker" [(ngModel)]="cmrSearch.searchReq.event.eventToPicker"
+           placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="eventToPicker"></mat-datepicker-toggle>
+    <mat-datepicker #eventToPicker></mat-datepicker>
+  </mat-form-field>
+  <br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button mat-raised-button (click)="cmrSearch.eraseSearch()">Erase</button>
+  <button mat-raised-button [ngStyle]="{'background-color':'#17a4da','color':'white'}" (click)="find()">Search</button>
+</div>
+
+
+<div *ngIf="showNoResaultFound" class="watermark">
+  No Results Found
+</div>
