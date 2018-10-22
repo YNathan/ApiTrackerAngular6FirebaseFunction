@@ -25,9 +25,16 @@ export class ComroadsService {
   private getStartSimulatorUrl = this.serveIpAndPortUrl + '/simulate';
   private getStopSimulatorUrl = this.serveIpAndPortUrl + '/stop_simulator';
   private getCurrentTripsReportsUrl = this.serveIpAndPortUrl + '/current_trips';
+  private getUsersUrl = this.serveIpAndPortUrl + '/users';
 
 
   constructor(private Http: Http) {
+  }
+
+  getUsers() {
+    return this.Http.get(this.getUsersUrl).pipe(map(function (data) {
+      return data.json();
+    }));
   }
 
   currentTripGeoJsons() {

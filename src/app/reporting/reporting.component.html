@@ -1,6 +1,6 @@
 <br>
 <br><br><br>
-<button mat-raised-button (click)="lastWeekInCsv()">Last 7 Days in Csv</button>
+
 <br>
 <div layout="row" layout-align="center center">
     <mat-button-toggle-group #group="matButtonToggleGroup">
@@ -15,6 +15,11 @@
       </mat-button-toggle>
     </mat-button-toggle-group>
     <button mat-raised-button (click)="combineCharts()">Combine Data</button>
+</div>
+
+<div layout="row" layout-align="center center">
+    <button mat-raised-button (click)="lastWeekInCsv()">Last 7 Days in Csv</button>
+    <mat-card>Today Registrations {{todayUsersRegistration}}</mat-card>
 </div>
 
 <div layout="column" layout-sm="column" flex *ngIf="showCharts">
