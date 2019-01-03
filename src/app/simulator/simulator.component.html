@@ -1,7 +1,7 @@
 <br><br><br><br>
 
 
-<div class="example-form">
+<!--div class="example-form">
   <b [ngStyle]="{'font':'Times New Roman','color':'#130bda','font-size':'42px'}">Blue Scenario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
   <mat-form-field>
     <input matInput placeholder="Number Of Vehicules" [(ngModel)]="blue_line_count" type="number"
@@ -15,30 +15,29 @@
   </mat-form-field>
 
   <br/>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <button mat-raised-button [ngStyle]="{'background-color':'rgb(23, 164, 218)','color':'white'}"
           (click)="startSimulator()">Start Simulation
   </button>
   <button mat-raised-button [ngStyle]="{'background-color':'#da4317','color':'white'}" (click)="stopSimulator()">Stop
     Simulator
   </button>
-</div>
+</div-->
 
 <div>
-  <h1>Live Cars</h1>
+  <!--h1>Live Cars</h1-->
   <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude" [fullscreenControl]="true">
     <div *ngFor="let carLocation of carsLngLat">
       <agm-marker-cluster>
         <agm-marker [latitude]="carLocation.latitude" [longitude]="carLocation.longitude"
                     [label]="carLocation.carNumber"
-                    [iconUrl]="'comroadsMarker.png'"></agm-marker>
+                    [iconUrl]="'comroadsMarker.png'" (markerClick)="marckerClicked(carLocation.carNumber)"></agm-marker>
       </agm-marker-cluster>
       <!--[iconUrl]="'car.png'"   [options]="markersOptions"-->
     </div>
-    <agm-data-layer [geoJson]="blueLineGeoJson" [style]="getColor"></agm-data-layer>
-    <agm-data-layer [geoJson]="orangeLineGeoJson" [style]="getColor"></agm-data-layer>
+    <!--agm-data-layer [geoJson]="blueLineGeoJson" [style]="getColor"></agm-data-layer>
+    <agm-data-layer [geoJson]="orangeLineGeoJson" [style]="getColor"></agm-data-layer-->
+
   </agm-map>
 
 </div>
+All Reserved To Jacob Nathan Products@

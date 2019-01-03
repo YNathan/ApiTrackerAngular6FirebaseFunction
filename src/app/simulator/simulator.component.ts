@@ -3,6 +3,10 @@ import {ComroadsService} from '../comroads.service';
 import {} from '@types/googlemaps';
 import Feature = google.maps.Data.Feature;
 import {ComroadsFunctionsService} from '../comroadsFunctions.service';
+import {ComroadsSearch} from "../ComroadsSearch";
+import {MatTableDataSource} from "@angular/material";
+import {User} from "../user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-simulator',
@@ -14,7 +18,7 @@ export class SimulatorComponent implements OnInit, OnDestroy {
   blue_line_count: number;
   orange_line_count: number;
 
-  zoom = 13;
+  zoom = 8;
   latitude = 31.767493;
   longitude = 35.198666;
   carsLngLat = [];
@@ -24,7 +28,7 @@ export class SimulatorComponent implements OnInit, OnDestroy {
   orangeLineGeoJson: any;
 
 
-  constructor(private comroadsService: ComroadsService, private cgf: ComroadsFunctionsService) {
+  constructor(private comroadsService: ComroadsService, private cgf: ComroadsFunctionsService, private cmrSearch: ComroadsSearch, private router: Router,) {
   }
 
   ngOnInit() {
@@ -36,9 +40,9 @@ export class SimulatorComponent implements OnInit, OnDestroy {
     }, 10000);
 
 
-    this.blueLineGeoJson = this.cgf.buildGeoJsonFromSamplesArray(this.blueLine.samples);
+    // this.blueLineGeoJson = this.cgf.buildGeoJsonFromSamplesArray(this.blueLine.samples);
 
-    this.orangeLineGeoJson = this.cgf.buildOrangeGeoJsonFromSamplesArray(this.orangeLine.samples);
+    // this.orangeLineGeoJson = this.cgf.buildOrangeGeoJsonFromSamplesArray(this.orangeLine.samples);
 
   }
 
@@ -99,6 +103,15 @@ export class SimulatorComponent implements OnInit, OnDestroy {
     );
   }
 
+  marckerClicked(carNumber) {
+    this.cmrSearch.eraseSearch();
+    this.cmrSearch.searchReq.user.user_id = carNumber;
+    this.comroadsService.search(this.cmrSearch.searchReq).subscribe(data => {
+      this.cmrSearch.searchRes.usersDataSource = new MatTableDataSource<User>(data.body.results);
+      this.router.navigate(['/', 'users']);
+    });
+
+  }
 
   keyDownFunction(event) {
     if (event.keyCode == 13) {

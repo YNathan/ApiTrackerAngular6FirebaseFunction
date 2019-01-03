@@ -1,8 +1,8 @@
 {
   "hosting": {
     "redirects": [ {
-      "source" : "/dashboard",
-      "destination" : "/dashboard",
+      "source" : "/login",
+      "destination" : "/login",
       "type" : 301
     } ],
     "public": "dist",
