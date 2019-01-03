@@ -7,9 +7,11 @@ import {ReportingComponent} from './reporting/reporting.component';
 import {EventViewerComponent} from './event-viewer/event-viewer.component';
 import {FindComponent} from './find/find.component';
 import {SimulatorComponent} from './simulator/simulator.component';
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'users', component: UsersComponent},
   { path: 'reporting', component: ReportingComponent},

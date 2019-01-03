@@ -15,6 +15,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
 // videogular
 import {VgCoreModule} from 'videogular2/core';
 import {VgControlsModule} from 'videogular2/controls';
@@ -66,6 +67,11 @@ import {ComroadsSearch} from './ComroadsSearch';
 import {ComroadsObjects} from './comroadsObjects.service';
 import {ComroadsState} from './ComroadsState';
 import { SimulatorComponent } from './simulator/simulator.component';
+import { LoginComponent } from './login/login.component';
+import {AngularFireModule} from "angularfire2";
+import {environment} from "../environments/environment";
+import {AngularFireDatabaseModule} from "angularfire2/database";
+import {AngularFireAuth} from "angularfire2/auth";
 
 @NgModule({
   imports: [
@@ -82,6 +88,8 @@ import { SimulatorComponent } from './simulator/simulator.component';
     HttpModule,
     MatFormFieldModule,
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, // for database
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAr1m1NSUD2vN0Ec32qSqN4SXqCE_7Ac70'
     }),
@@ -177,7 +185,7 @@ import { SimulatorComponent } from './simulator/simulator.component';
     MatTooltipModule
 
   ],
-  providers: [ComroadsService, ComroadsFunctionsService, ComroadsSearch, GoogleChartsLoaderService,ComroadsObjects,ComroadsState],
+  providers: [ComroadsService, ComroadsFunctionsService, ComroadsSearch, GoogleChartsLoaderService,ComroadsObjects,ComroadsState,AngularFireAuth],
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -185,7 +193,8 @@ import { SimulatorComponent } from './simulator/simulator.component';
     ReportingComponent,
     EventViewerComponent,
     FindComponent,
-    SimulatorComponent
+    SimulatorComponent,
+    LoginComponent
   ],
   bootstrap: [AppComponent]
 })
